@@ -15,7 +15,7 @@ Please review the ReadMe for additional details such as configuration setup requ
 
 # Creating a starter solution + project
 
-We can also created a starter solution + project by running the following Powershell command. Note that this Powershell script is also used internally to create a new example, so please note for any new changes.
+We can also create a starter solution + project by running the following Powershell command. Note that this Powershell script is also used internally to create a new example, so please note for any new changes.
 
 ```
 .\GenSolution.ps1 -Name $nameOfProject
