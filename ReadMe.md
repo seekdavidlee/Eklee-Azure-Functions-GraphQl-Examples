@@ -1,6 +1,6 @@
 # Introduction
 
-Here, you will find some simple examples related to [Eklee.Azure.Functions.GraphQl](https://www.nuget.org/packages/Eklee.Azure.Functions.GraphQl). Please review the code comments for additional details in each of the Example.
+Here, you will find some examples related to the usage of [Eklee.Azure.Functions.GraphQl](https://www.nuget.org/packages/Eklee.Azure.Functions.GraphQl).
 
 ## Structure of the Example
 
@@ -11,14 +11,17 @@ Each Example consists of:
 * [Postman](https://www.getpostman.com/) test.
 * ReadMe.md
 
-Please review the ReadMe for additional requirements such as configuration setup requirements. After setting up the Project, we should be able to run it.
+Please review the ReadMe for additional details such as configuration setup requirements. After setting up the Project, we will be able to run it.
 
 # Creating a starter solution + project
 
-You can also created a starter solution + project by running the following Powershell command:
+We can also created a starter solution + project by running the following Powershell command. Note that this Powershell script is also used internally to create a new example, so please note for any new changes.
 
 ```
 .\GenSolution.ps1 -Name $nameOfProject
 ```
 
-Remember to provide a name for your starter solution + project. There are two other parameters -OutputPath and -NugetSource which will allow you to specify where you want the solution and project to be and what nuget sources to use. This Powershell script is used internally to create the Examples, so please note for any new changes.
+Remember to provide a name for the starter solution + project. There are two other optional parameters -OutputPath and -NugetSource.
+
+* The OutputPath parameter will allow us to specify where we want the solution and project to be created.
+* The NugetSource specify which nuget source to use for adding the Eklee.Azure.Functions.GraphQl nuget package.
