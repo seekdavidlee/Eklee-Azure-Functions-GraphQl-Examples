@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.InMemory", "Example.InMemory\Example.InMemory.csproj", "{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanTests", "PostmanTests", "{E5FFE45C-1358-48C0-ABEC-425695F3850A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Debug|x64.Build.0 = Debug|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Debug|x86.Build.0 = Debug|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Release|x64.ActiveCfg = Release|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Release|x64.Build.0 = Release|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Release|x86.ActiveCfg = Release|Any CPU
+		{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0883E1E4-338D-4A2B-82DA-4B437B475039}
+	EndGlobalSection
+EndGlobal
