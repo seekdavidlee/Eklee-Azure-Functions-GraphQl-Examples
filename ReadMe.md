@@ -4,7 +4,14 @@ Here, you will find some simple examples related to [Eklee.Azure.Functions.Graph
 
 ## Structure of the Example
 
-Each Example consists of a Solution which we can find a Project as well as a [Postman](https://www.getpostman.com/) test. There could be configuration requirements. Please note that in each Project. After setting up the Project, we should be able to run it.
+Each Example consists of:
+
+* Solution for launching with Visual Studio.
+* Project containing the code for your GraphQL API. 
+* [Postman](https://www.getpostman.com/) test.
+* ReadMe.md
+
+Please review the ReadMe for additional requirements such as configuration setup requirements. After setting up the Project, we should be able to run it.
 
 # Creating a starter solution + project
 
