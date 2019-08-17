@@ -1,0 +1,414 @@
+{
+	"info": {
+		"_postman_id": "e9948ba7-cd63-4796-810f-18ac78a3b93f",
+		"name": "Example.InMemory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BatchCreateProducts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Created data contains 20 items\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.batchCreateProduct.length).to.eql(20);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n   batchCreateProduct(product:[\r\n    { id:\"p1\", name:\"banana\" price: 1.99 },\r\n    { id:\"p2\", name:\"apple\" price: 0.99 },\r\n    { id:\"p3\", name:\"pinapple\" price: 0.92 },\r\n    { id:\"p4\", name:\"durain\" price: 1.09 },\r\n    { id:\"p5\", name:\"kiwi\" price: 1.19 },\r\n    { id:\"p6\", name:\"pie\" price: 4.45 },\r\n    { id:\"p7\", name:\"marble cake\" price: 3.99 },\r\n    { id:\"p8\", name:\"salt\" price: 9.31 },\r\n    { id:\"p9\", name:\"pepper\" price: 2.09 },\r\n    { id:\"p10\", name:\"sugar\" price: 4.88 },\r\n    { id:\"p11\", name:\"coffee\" price: 31.90 },\r\n    { id:\"p12\", name:\"nuts\" price: 0.93 },\r\n    { id:\"p13\", name:\"carrot\" price: 3.41 },\r\n    { id:\"p14\", name:\"brocolli\" price: 6.78 },\r\n    { id:\"p15\", name:\"ginger\" price: 12.99 },\r\n    { id:\"p16\", name:\"watermelon\" price: 12.99 },\r\n    { id:\"p17\", name:\"jack fruit\" price: 13.00 },\r\n    { id:\"p18\", name:\"potato\" price: 11.29 },\r\n    { id:\"p19\", name:\"beef\" price: 12.09 },\r\n    { id:\"p20\", name:\"chicken\" price: 4.31 }\r\n    \r\n  ]){\r\n    id\r\n    name\r\n    price\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/GraphQLFunction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"GraphQLFunction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BatchCreateCustomers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Created data contains 20 items\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.batchCreateCustomer.length).to.eql(10);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\r\n  batchCreateCustomer(customer:[\r\n    { id: \"c1\", name: \"John\" },\r\n    { id: \"c2\", name: \"Michael\" },\r\n    { id: \"c3\", name: \"Frank\" },\r\n    { id: \"c4\", name: \"Doug\" },\r\n    { id: \"c5\", name: \"David\" },\r\n    { id: \"c6\", name: \"Allen\" },\r\n    { id: \"c7\", name: \"Nancy\" },\r\n    { id: \"c8\", name: \"Mary\" },\r\n    { id: \"c9\", name: \"Shirley\" },\r\n    { id: \"c10\", name: \"Ali\" }\r\n  ]){\r\n    id\r\n    name\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/GraphQLFunction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"GraphQLFunction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BatchCreateOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Created data contains 20 items\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.data.batchCreateOrder.length).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation{\r\n  batchCreateOrder(order: [\r\n    { id:\"o1\", customerId: \"c1\", isActive: true, ordered:\"2019-08-01\", productIdList: [ \"p1\",\"p2\"] },\r\n    { id:\"o2\", customerId: \"c4\", isActive: true, ordered:\"2019-01-11\", productIdList: [ \"p1\" ] },\r\n    { id:\"o3\", customerId: \"c5\", isActive: true, ordered:\"2019-06-21\", productIdList: [ \"p3\",\"p4\",\"p5\",\"p6\",\"p9\"] },\r\n    { id:\"o4\", customerId: \"c6\", isActive: true, ordered:\"2019-03-11\", productIdList: [ \"p6\",\"p8\",\"p14\"] },\r\n    { id:\"o5\", customerId: \"c9\", isActive: true, ordered:\"2019-02-06\", productIdList: [ \"p1\",\"p4\"] }\r\n  ]){\r\n    id\r\n    customerId\r\n    isActive\r\n    ordered\r\n    productIdList\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/GraphQLFunction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"GraphQLFunction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductById_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Contains correct payload\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    var item = jsonData.data.getProductById;",
+							"    pm.expect(item.id).to.eql(\"p10\");",
+							"    pm.expect(item.name).to.eql(\"sugar\");",
+							"    pm.expect(item.price).to.eql(4.88);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n  getProductById(id:{equal:\"p10\"}){\r\n    id\r\n    name\r\n    price\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/GraphQLFunction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"GraphQLFunction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductById_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Contains correct payload\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    var item = jsonData.data.getProductById;",
+							"    pm.expect(item.id).to.eql(\"p1\");",
+							"    pm.expect(item.name).to.eql(\"banana\");",
+							"    pm.expect(item.price).to.eql(1.99);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n  getProductById(id:{equal:\"p1\"}){\r\n    id\r\n    name\r\n    price\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/GraphQLFunction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"GraphQLFunction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomerOrderByOrderId_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Contains correct payload\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    var item = jsonData.data.getOrderById;",
+							"    pm.expect(item.id).to.eql(\"o2\");",
+							"    pm.expect(item.isActive).to.eql(true);",
+							"    pm.expect(item.ordered).to.eql(\"2019-01-11\");",
+							"    ",
+							"    pm.expect(item.products.length).to.eql(1);",
+							"    pm.expect(item.customer.id).to.eql(\"c4\");",
+							"    pm.expect(item.customer.name).to.eql(\"Doug\");",
+							"    ",
+							"    var product = item.products[0];",
+							"    pm.expect(product.id).to.eql(\"p1\");",
+							"    pm.expect(product.name).to.eql(\"banana\");",
+							"    pm.expect(product.price).to.eql(1.99);",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n  getOrderById(id:{equal:\"o2\" }) {\r\n    id\r\n    customer {\r\n      id\r\n      name\r\n    }\r\n    isActive\r\n    ordered\r\n    products {\r\n      id\r\n      name\r\n      price\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/GraphQLFunction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"GraphQLFunction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomerOrderByOrderId_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Contains correct payload\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    var item = jsonData.data.getOrderById;",
+							"    pm.expect(item.id).to.eql(\"o3\");",
+							"    pm.expect(item.isActive).to.eql(true);",
+							"    pm.expect(item.ordered).to.eql(\"2019-06-21\");",
+							"    ",
+							"    pm.expect(item.products.length).to.eql(5);",
+							"    pm.expect(item.customer.id).to.eql(\"c5\");",
+							"    pm.expect(item.customer.name).to.eql(\"David\");",
+							"    ",
+							"    var product = item.products.filter(x=> x.id === \"p3\")[0];",
+							"    pm.expect(product.id).to.eql(\"p3\");",
+							"    product = item.products.filter(x=> x.id === \"p4\")[0];",
+							"    pm.expect(product.id).to.eql(\"p4\");    ",
+							"    product = item.products.filter(x=> x.id === \"p5\")[0];",
+							"    pm.expect(product.id).to.eql(\"p5\");",
+							"    product = item.products.filter(x=> x.id === \"p6\")[0];",
+							"    pm.expect(product.id).to.eql(\"p6\");",
+							"    product = item.products.filter(x=> x.id === \"p9\")[0];",
+							"    pm.expect(product.id).to.eql(\"p9\");    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\r\n  getOrderById(id:{equal:\"o3\" }) {\r\n    id\r\n    customer {\r\n      id\r\n      name\r\n    }\r\n    isActive\r\n    ordered\r\n    products {\r\n      id\r\n      name\r\n      price\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/GraphQLFunction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"GraphQLFunction"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

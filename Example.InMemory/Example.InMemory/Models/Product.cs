@@ -13,6 +13,6 @@ namespace Example.InMemory.Models
 		public string Name { get; set; }
 
 		[Description("Price of the Product.")]
-		public decimal Price { get; set; }
+		public double Price { get; set; }
 	}
 }

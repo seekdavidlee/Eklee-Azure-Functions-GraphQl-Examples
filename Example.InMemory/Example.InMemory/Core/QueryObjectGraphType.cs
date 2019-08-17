@@ -13,18 +13,18 @@ namespace Example.InMemory.Core
 		{
 			Name = "query";
 
-			//--Begin--
-
+			// 1) Defines a simple way to get a single product by using the Key
+			// which is the Id property in this case.
 			queryBuilderFactory.Create<Product>(this, "GetProductById")
-				.WithParameterBuilder()
-				.WithKeys()
-				.BuildQuery()
-				.BuildWithSingleResult();
+				.WithParameterBuilder()     // 2) Starts the query builder.
+					.WithKeys()             // 3) Specify the use of Key attribute. This will create a query parameter on the client side to send in.
+				.BuildQuery()               // 4) Finalize the query builder.
+				.BuildWithSingleResult();   // 5) Specify that we are expected to get back a single entity.
 
 			queryBuilderFactory.Create<CustomerOrder>(this, "GetOrderById")
 				.WithParameterBuilder()
 				.BeginQuery<Order>()
-					.WithProperty(x => x.Id)    // This will create a query parameter on the client side to send in.
+					.WithProperty(x => x.Id)
 					.BuildQueryResult((ctx) =>
 					{
 						var results = ctx.GetQueryResults<Order>();

@@ -9,6 +9,7 @@ namespace Example.InMemory.Core
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
+			// Use the built-in memory for caching.
 			builder.UseDistributedCache<MemoryDistributedCache>();
 
 			builder.RegisterGraphQl<SchemaConfig>();

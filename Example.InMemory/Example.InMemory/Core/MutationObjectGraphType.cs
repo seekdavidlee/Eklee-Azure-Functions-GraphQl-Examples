@@ -11,21 +11,23 @@ namespace Example.InMemory.Core
 		{
 			Name = "mutation";
 
-			//--Begin--
-
+			// 1) Use in memory repository to store Product information.
 			inputBuilderFactory.Create<Product>(this)
 				.ConfigureInMemory<Product>()
-				.BuildInMemory();
+				.BuildInMemory()    // 2) Nothing to configure.
+				.Build();           // 3) Build the type.
 
+			// Use in memory repository to store Customer information.
 			inputBuilderFactory.Create<Customer>(this)
 				.ConfigureInMemory<Customer>()
-				.BuildInMemory();
+				.BuildInMemory()
+				.Build(); ;
 
+			// Use in memory repository to store Order information.
 			inputBuilderFactory.Create<Order>(this)
 				.ConfigureInMemory<Order>()
-				.BuildInMemory();
-
-			//--End--
+				.BuildInMemory()
+				.Build(); ;
 		}
 	}
 }
