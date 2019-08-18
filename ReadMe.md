@@ -13,6 +13,15 @@ Each Example consists of:
 
 Please review the ReadMe for additional details such as configuration setup requirements. After setting up the Project, we will be able to run it.
 
+
+## Testing the Example
+
+We can use the built-in testing framework which uses newman to test the Example against the Postman test collection. Use the following Powershell command:
+
+```
+.\Util\RunTest.ps1 -Name $nameOfProject
+```
+
 # Creating a starter solution + project
 
 We can also create a starter solution + project by running the following Powershell command. Note that this Powershell script is also used internally to create a new example, so please note for any new changes.

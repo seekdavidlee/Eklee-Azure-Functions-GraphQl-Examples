@@ -62,6 +62,7 @@ if ((Test-Path -Path $projectPath ) -eq $false) {
 
     $projectFullName = "$projectName.csproj"
     $projContent = Get-Content -Path .\$projectFullName
+	$projContent = $projContent.Replace("<TargetFramework>netcoreapp2.1</TargetFramework>","<TargetFramework>netstandard2.0</TargetFramework>")
     $projContent = $projContent.Replace("<AzureFunctionsVersion></AzureFunctionsVersion>","<AzureFunctionsVersion>v2</AzureFunctionsVersion>")
     Set-Content $projContent -Path .\$projectFullName
 
