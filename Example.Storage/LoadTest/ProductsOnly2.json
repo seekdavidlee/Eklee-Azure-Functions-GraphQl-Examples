@@ -1,0 +1,23 @@
+{
+	"mutations": [
+		{
+			"name": "batchCreateProduct",
+			"inputs": [
+				{
+					"type": "product",
+					"batchCount": "10",
+					"value": {
+						"id": "@new_guid()",
+						"category": "@rand_string(10,20)",
+						"costPrice": "@rand_money(0.99,999.99)",
+						"name": "@rand_string(20,60)",
+						"sellPrice": "@rand_money(0.19,999.99)"
+					}
+				}
+			],
+			"output": "id\r\ncategory"
+		}
+	],
+	"run": 10,
+	"parallel": false
+}
