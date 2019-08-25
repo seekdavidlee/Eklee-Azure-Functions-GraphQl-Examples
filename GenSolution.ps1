@@ -33,6 +33,9 @@ if ((Test-Path -Path $projectPath ) -eq $false) {
     Write-Host "ProjectPath: $projectPath"
     New-Item -ItemType Directory -Force -Path $projectPath
 
+	# Store current path.
+	$currentDir = (Get-Location).Path
+
     Push-Location $projectPath
     dotnet new sln --name $projectName
     New-Item -ItemType Directory -Force $projectName
@@ -47,7 +50,7 @@ if ((Test-Path -Path $projectPath ) -eq $false) {
     dotnet add package Eklee.Azure.Functions.GraphQl -s $NugetSource
 	dotnet add package Microsoft.Extensions.Caching.Memory
     
-    Copy-Item ..\..\Templates\* -Destination .\ -Recurse -Force
+    Copy-Item $currentDir\Templates\* -Destination .\ -Recurse -Force
 
     $allFiles = Get-ChildItem -Path .\*.cs -Recurse -Force
 
