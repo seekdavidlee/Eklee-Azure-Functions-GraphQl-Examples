@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LoadTest", "LoadTest", "{D3
 	ProjectSection(SolutionItems) = preProject
 		LoadTest\ProductsOnly.json = LoadTest\ProductsOnly.json
 		LoadTest\ProductsOnly2.json = LoadTest\ProductsOnly2.json
+		LoadTest\ProductsParallel3.json = LoadTest\ProductsParallel3.json
 	EndProjectSection
 EndProject
 Global
