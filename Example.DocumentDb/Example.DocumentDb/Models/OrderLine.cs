@@ -1,7 +1,9 @@
-﻿using Eklee.Azure.Functions.GraphQl.Connections;
+﻿using System;
+using System.Collections.Generic;
+using Eklee.Azure.Functions.GraphQl.Connections;
 using System.ComponentModel;
 
-namespace Example.Storage.Models
+namespace Example.DocumentDb.Models
 {
 	public class OrderLine
 	{
