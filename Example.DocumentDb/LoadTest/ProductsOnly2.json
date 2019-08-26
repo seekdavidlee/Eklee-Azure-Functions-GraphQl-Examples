@@ -11,7 +11,7 @@
 						"category": "@rand_string(10,20)",
 						"costPrice": "@rand_money(0.99,999.99)",
 						"name": "@rand_string(20,60)",
-						"description": "@rand_string(100,3000)",
+						"description": "@rand_string(100,1000)",
 						"sellPrice": "@rand_money(0.19,999.99)"
 					}
 				}
