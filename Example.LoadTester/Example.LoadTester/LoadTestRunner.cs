@@ -44,7 +44,8 @@ namespace Example.LoadTester
 			loadTestRunStat.Summary = new LoadTestRunSummary
 			{
 				TotalPayloadSizeInMb = loadTestRunStat.RunsStat.Sum(x => x.PayloadSizeInKb) / 1000,
-				AverageTimeInSeconds = loadTestRunStat.RunsStat.Average(x => (x.End - x.Start).TotalSeconds)
+				AverageTimeInSeconds = loadTestRunStat.RunsStat.Average(x => (x.End - x.Start).TotalSeconds),
+				TotalTimeMinutes = loadTestRunStat.RunsStat.Sum(x => (x.End - x.Start).TotalMinutes),
 			};
 			return loadTestRunStat;
 		}
