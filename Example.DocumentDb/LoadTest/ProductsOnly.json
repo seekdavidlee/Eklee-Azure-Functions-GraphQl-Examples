@@ -20,6 +20,6 @@
 		}
 	],
 	"run": 100,
-	"parallel": false
+	"parallel": null
 }
 

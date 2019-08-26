@@ -19,5 +19,5 @@
 		}
 	],
 	"run": 10,
-	"parallel": false
+	"parallel": null
 }
