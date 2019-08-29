@@ -22,8 +22,13 @@ namespace Example.LoadTester
 
 				var result = await loadTestRunner.RunAsync(cmdArgs.GraphQLUrl, Console.WriteLine);
 
-				var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
-				using (var sr = new StreamWriter(fileName))
+				if (!Directory.Exists(cmdArgs.ReportOutputDirectory))
+				{
+					Directory.CreateDirectory(cmdArgs.ReportOutputDirectory);
+				}
+
+				var reportFilePath = cmdArgs.ReportOutputDirectory + "\\" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".txt";
+				using (var sr = new StreamWriter(reportFilePath))
 					sr.Write(JsonConvert.SerializeObject(result));
 			}, errors => Task.FromResult(0));
 		}

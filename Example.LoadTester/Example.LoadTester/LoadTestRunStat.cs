@@ -11,6 +11,8 @@ namespace Example.LoadTester
 			Executed = DateTime.UtcNow;
 		}
 
+		public string GraphQLUrl { get; set; }
+
 		public DateTime Executed { get; }
 		public List<MutationRunStats> RunsStat { get; }
 

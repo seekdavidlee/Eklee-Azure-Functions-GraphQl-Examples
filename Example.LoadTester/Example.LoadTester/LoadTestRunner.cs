@@ -18,7 +18,7 @@ namespace Example.LoadTester
 
 		public async Task<LoadTestRunStat> RunAsync(string url, Action<string> notify)
 		{
-			var loadTestRunStat = new LoadTestRunStat();
+			var loadTestRunStat = new LoadTestRunStat { GraphQLUrl = url };
 			var httpClient = new GraphQLClient(url);
 			httpClient.Options.MediaType = new MediaTypeWithQualityHeaderValue("application/json");
 
