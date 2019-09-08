@@ -19,3 +19,11 @@ Create a local.settings.json file with the following content to start it. Be sur
 	}
 }
 ```
+
+## Load test
+
+Use the following command to run a load test from the root directory.
+
+```
+.\Util\RunLoadTest.ps1 -Name Example.DocumentDb -ApiName testdocumentdb -TestFileName ProductsOnly2.json -OutputReportDir C:\dev\loadtest-reports
+```

@@ -5,7 +5,7 @@
 			"inputs": [
 				{
 					"type": "product",
-					"batchCount": "10",
+					"batchCount": "300",
 					"value": {
 						"id": "@new_guid()",
 						"category": "@rand_string(10,20)",

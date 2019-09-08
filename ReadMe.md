@@ -34,3 +34,11 @@ Remember to provide a name for the starter solution + project. There are two oth
 
 * The OutputPath parameter will allow us to specify where we want the solution and project to be created.
 * The NugetSource specify which nuget source to use for adding the Eklee.Azure.Functions.GraphQl nuget package.
+
+# Load Testing
+
+We have an internal testing tool that will perform load testing on the examples provided. It is in the following syntax. Be sure the load testng manifest file is present. Refer to each example for load test script.
+
+```
+.\Util\RunLoadTest.ps1 -Name <Folder of the example> -ApiName <API endpoint> -TestFileName <Test file> -OutputReportDir <Output directory>
+```
