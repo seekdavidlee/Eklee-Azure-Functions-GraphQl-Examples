@@ -14,12 +14,27 @@ if ((Test-Path -Path $wd) -eq $false) {
     New-Item -ItemType Directory -Force -Path $wd
 }
 
-$nupkgPath = "$wd\$release.nupkg"
+$projectNupkgPath = "$wd\$release.nupkg"
 
-if ((Test-Path -Path $nupkgPath) -eq $false) {
+if ((Test-Path -Path $projectNupkgPath) -eq $false) {
     Write-Host "Downloading file $($result.projectTemplates)"
-    Invoke-WebRequest -Uri $result.projectTemplates -OutFile $nupkgPath
+    Invoke-WebRequest -Uri $result.projectTemplates -OutFile $projectNupkgPath
+} else {
+    Write-Host "Found $projectNupkgPath"
 }
+
+dotnet new -i $projectNupkgPath
+
+$templateNupkgPath = "$wd\$release-template.nupkg"
+
+if ((Test-Path -Path $templateNupkgPath) -eq $false) {
+    Write-Host "Downloading file $($result.itemTemplates)"
+    Invoke-WebRequest -Uri $result.itemTemplates -OutFile $templateNupkgPath
+} else {
+    Write-Host "Found $templateNupkgPath"
+}
+Write-Host "Installing $templateNupkgPath"
+dotnet new -i $templateNupkgPath
 
 if (!$OutputPath) {
     $projectPath = ".\$projectName"
@@ -40,7 +55,10 @@ if ((Test-Path -Path $projectPath ) -eq $false) {
     dotnet new sln --name $projectName
     New-Item -ItemType Directory -Force $projectName
     Push-Location $projectName
+    Write-Host "Creating a new Azure Function: $projectName"
     dotnet new "Azure Functions" -n $projectName -lang "C#"
+
+    Write-Host "Creating a new Azure Function Trigger."
     dotnet new "http" -n GraphQLFunction -lang "C#"
 
     if (!$NugetSource) {
