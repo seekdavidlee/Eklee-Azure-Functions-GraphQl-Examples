@@ -24,7 +24,7 @@ We can use the built-in testing framework which uses newman to test the Example 
 
 # Creating a starter solution + project
 
-We can also create a starter solution + project by running the following Powershell command. Note that this Powershell script is also used internally to create a new example, so please note for any new changes.
+We can also create a starter solution + project by running the following Powershell command. Note that this Powershell script is also used internally to create a new example, so please note for any new changes. We will also create a starter Angular App.
 
 ```
 .\GenSolution.ps1 -Name $nameOfProject
@@ -34,6 +34,12 @@ Remember to provide a name for the starter solution + project. There are two oth
 
 * The OutputPath parameter will allow us to specify where we want the solution and project to be created.
 * The NugetSource specify which nuget source to use for adding the Eklee.Azure.Functions.GraphQl nuget package.
+
+## To create a example project for use in this repo, add the ExampleProject switch.
+
+```
+.\GenSolution.ps1 -Name $nameOfProject -ExampleProject
+```
 
 # Load Testing
 
