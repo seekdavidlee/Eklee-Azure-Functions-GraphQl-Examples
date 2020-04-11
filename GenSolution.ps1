@@ -1,10 +1,17 @@
 param(
+    [switch]$ExampleProject,
     [Parameter(Mandatory = $True)][string]$Name,
     [Parameter(Mandatory = $False)][string]$OutputPath,    
     [Parameter(Mandatory = $False)][string]$NugetSource
 )
 
+if (!$ExampleProject -and $Name.Contains(".")) {
+    Write-Warning "Project name cannot contain period. Please replace with dash."
+    return
+}
+
 $projectName = $Name
+
 $response = Invoke-RestMethod -Uri "https://functionscdn.azureedge.net/public/cli-feed-v3.json"
 $release = $response.tags.v2.release
 $result = $response.releases.$release
@@ -38,27 +45,35 @@ else {
 Write-Host "Installing $templateNupkgPath"
 dotnet new -i $templateNupkgPath
 
-if (!$OutputPath) {
+if (!$OutputPath -Or $ExampleProject) {
     $projectPath = ".\$projectName"
 }
 else {
-    $projectPath = $OutputPath
+    $OutputPath = $OutputPath.TrimEnd("\")
+    $projectPath = "$OutputPath\$projectName"
 }
 
-if ((Test-Path -Path $projectPath ) -eq $false) {
+if ((Test-Path -Path $projectPath) -eq $false) {
 
     Write-Host "ProjectPath: $projectPath"
-    New-Item -ItemType Directory -Force -Path $projectPath
+
+    New-Item -ItemType Directory $projectPath
 
     # Store current path.
     $currentDir = (Get-Location).Path
 
     Push-Location $projectPath
-    dotnet new sln --name $projectName
-    New-Item -ItemType Directory -Force $projectName
-    Push-Location $projectName
-    Write-Host "Creating a new Azure Function: $projectName"
-    dotnet new "Azure Functions" -n $projectName -lang "C#"
+    if (!$ExampleProject) {
+        $apiProjectName = $Name + "-Api"
+    }
+    else {
+        $apiProjectName = $Name 
+    }
+    dotnet new sln --name $apiProjectName
+    New-Item -ItemType Directory -Force $apiProjectName
+    Push-Location $apiProjectName
+    Write-Host "Creating a new Azure Function: $apiProjectName"
+    dotnet new "Azure Functions" -n $apiProjectName -lang "C#"
 
     Write-Host "Creating a new Azure Function Trigger."
     dotnet new "http" -n GraphQLFunction -lang "C#"
@@ -78,7 +93,7 @@ if ((Test-Path -Path $projectPath ) -eq $false) {
 
     $allFiles | ForEach-Object {        
         $path = $_.Directory.FullName + "\" + $_.Name
-        $refProjectName = $projectName.Replace("-", ".")
+        $refProjectName = $apiProjectName.Replace("-", ".")
         $content = Get-Content -Path $path
         $content = $content.Replace("namespace Example", "namespace $refProjectName")
         $content = $content.Replace("using Example.", "using $refProjectName.")
@@ -86,13 +101,20 @@ if ((Test-Path -Path $projectPath ) -eq $false) {
         Set-Content $content -Path $path
     }
 
-    $projectFullName = "$projectName.csproj"
+    $projectFullName = "$apiProjectName.csproj"
     $projContent = Get-Content -Path .\$projectFullName
     $projContent = $projContent.Replace("<TargetFramework>netcoreapp2.1</TargetFramework>", "<TargetFramework>netstandard2.0</TargetFramework>")
     $projContent = $projContent.Replace("<AzureFunctionsVersion>V2</AzureFunctionsVersion>", "<AzureFunctionsVersion>v3</AzureFunctionsVersion>")
     Set-Content $projContent -Path .\$projectFullName
 
     Pop-Location
-    dotnet sln "$projectName.sln" add "$projectName\$projectFullName"
+    dotnet sln "$apiProjectName.sln" add "$apiProjectName\$projectFullName"
+
+    if (!$ExampleProject) {
+        $appProjectName = $Name + "-App"
+        npm install @angular/cli
+        node_modules\.bin\ng new $appProjectName --defaults=true    
+    }
+
     Pop-Location
 }
