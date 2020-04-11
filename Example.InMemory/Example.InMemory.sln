@@ -6,6 +6,14 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.InMemory", "Example.InMemory\Example.InMemory.csproj", "{1BCB644C-82E7-47F2-9516-1D3B6650BBAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostmanTests", "PostmanTests", "{E5FFE45C-1358-48C0-ABEC-425695F3850A}"
+	ProjectSection(SolutionItems) = preProject
+		PostmanTests\Example.InMemory.postman_collection.json = PostmanTests\Example.InMemory.postman_collection.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E41F72D5-57D8-42C4-99A5-42559930FC20}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

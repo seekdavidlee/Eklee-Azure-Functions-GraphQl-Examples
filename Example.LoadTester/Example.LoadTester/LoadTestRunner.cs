@@ -1,8 +1,7 @@
-﻿using GraphQL.Client;
+﻿using GraphQL.Client.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Example.LoadTester
@@ -19,8 +18,8 @@ namespace Example.LoadTester
 		public async Task<LoadTestRunStat> RunAsync(string url, Action<string> notify)
 		{
 			var loadTestRunStat = new LoadTestRunStat { GraphQLUrl = url };
-			var httpClient = new GraphQLClient(url);
-			httpClient.Options.MediaType = new MediaTypeWithQualityHeaderValue("application/json");
+			var httpClient = new GraphQLHttpClient(url, new NewtonsoftJsonSerializer());
+			//httpClient.HttpClient.DefaultRequestHeaders.op.MediaType = "application/json";
 
 			if (_loadTestRun.Parallel != null &&
 				_loadTestRun.Parallel.Threads > 0 &&
@@ -56,7 +55,7 @@ namespace Example.LoadTester
 
 		private const string THREAD_ZERO = "Thread 0";
 
-		private async Task RunBatch(int count, LoadTestRunStat loadTestRunStat, GraphQLClient httpClient, Action<string> notify,
+		private async Task RunBatch(int count, LoadTestRunStat loadTestRunStat, GraphQLHttpClient httpClient, Action<string> notify,
 			int? threadCounter = null)
 		{
 			string appendNotify = threadCounter.HasValue ? $"Thread {threadCounter.Value}" : THREAD_ZERO;

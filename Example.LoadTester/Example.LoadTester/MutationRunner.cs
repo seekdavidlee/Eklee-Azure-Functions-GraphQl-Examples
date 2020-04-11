@@ -1,6 +1,6 @@
 ﻿using Example.LoadTester.Values;
-using GraphQL.Client;
-using GraphQL.Common.Request;
+using GraphQL;
+using GraphQL.Client.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +11,11 @@ namespace Example.LoadTester
 {
 	public class MutationRunner
 	{
-		private readonly GraphQLClient _client;
+		private readonly GraphQLHttpClient _client;
 		private readonly Mutation _mutation;
 		private readonly ValuesProvider _valuesProvider = new ValuesProvider();
 
-		public MutationRunner(GraphQLClient client, Mutation mutation)
+		public MutationRunner(GraphQLHttpClient client, Mutation mutation)
 		{
 			_client = client;
 			_mutation = mutation;
@@ -79,7 +79,7 @@ namespace Example.LoadTester
 			result.PayloadSizeInKb = Encoding.UTF8.GetByteCount(payload) / (double)1024;
 			result.Start = DateTime.UtcNow;
 
-			var response = await _client.PostAsync(new GraphQLRequest
+			var response = await _client.SendMutationAsync<object>(new GraphQLRequest
 			{
 				Query = payload
 			});

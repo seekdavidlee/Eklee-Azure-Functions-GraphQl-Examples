@@ -1,4 +1,4 @@
-﻿using GraphQL.Common.Response;
+﻿using GraphQL;
 using System;
 
 namespace Example.LoadTester
