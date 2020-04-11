@@ -16,7 +16,7 @@ Pop-Location
 $workingDir = "$Name\$Name\bin\$buildConfig\netstandard2.0"
 
 Push-Location $workingDir
-npm install --save-dev azure-functions-core-tools
+npm install --save-dev azure-functions-core-tools@3
 
 Start-Process -FilePath node_modules\.bin\func -ArgumentList "host start -p 7072"
 
@@ -28,7 +28,7 @@ Pop-Location
 
 Push-Location "Example.LoadTester\Example.LoadTester"
 
-dotnet run -r "$currentDir\$projectName\LoadTest\$TestFileName" -g "http://localhost:7072/api/$ApiName" -o $OutputReportDir
+dotnet run -- -r "$currentDir\$projectName\LoadTest\$TestFileName" -g "http://localhost:7072/api/$ApiName" -o $OutputReportDir
 
 Pop-Location
 

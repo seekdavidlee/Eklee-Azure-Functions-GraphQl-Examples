@@ -13,7 +13,7 @@ Pop-Location
 $workingDir = "$Name\$Name\bin\$buildConfig\netstandard2.0"
 
 Push-Location $workingDir
-npm install --save-dev azure-functions-core-tools
+npm install --save-dev azure-functions-core-tools@3
 npm install --save-dev newman
 
 Start-Process -FilePath node_modules\.bin\func -ArgumentList "host start"
@@ -37,7 +37,7 @@ Stop-Process $func
 
 if ($failures -gt 0) {
 	Write-Host "Failed!" -ForegroundColor red
-}else {
+} else {
 	Write-Host "Success!" -ForegroundColor green
 }
 

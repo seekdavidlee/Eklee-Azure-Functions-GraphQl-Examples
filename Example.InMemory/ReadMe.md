@@ -5,3 +5,9 @@ This example demostrates the use of the in-memory resolver for handling your Mod
 ## Setup
 
 There's nothing to setup. You can run the solution directly and be able to use the Postman example to call into it.
+
+Use the following command to run a postman test from the root directory.
+
+```
+.\Util\RunTest.ps1 -Name Example.InMemory
+```
