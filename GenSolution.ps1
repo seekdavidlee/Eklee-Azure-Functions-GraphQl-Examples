@@ -1,9 +1,12 @@
 param(
     [switch]$ExampleProject,
     [Parameter(Mandatory = $True)][string]$Name,
+    [Parameter(Mandatory = $False)][string]$ExampleType, 
     [Parameter(Mandatory = $False)][string]$OutputPath,    
     [Parameter(Mandatory = $False)][string]$NugetSource
 )
+
+$ErrorActionPreference = 'Stop'
 
 if (!$ExampleProject -and $Name.Contains(".")) {
     Write-Warning "Project name cannot contain period. Please replace with dash."
@@ -87,16 +90,36 @@ if ((Test-Path -Path $projectPath) -eq $false) {
     dotnet add package Microsoft.Azure.WebJobs.Extensions.Http
     dotnet add package Microsoft.Extensions.Caching.Memory
     
-    Copy-Item $currentDir\Templates\* -Destination .\ -Recurse -Force
+    if ($ExampleType) {
+        $ExampleSourcePath = "$currentDir\Example.$ExampleType\Example.$ExampleType"
+        New-Item -ItemType Directory .\Core
+        New-Item -ItemType Directory .\Models
+        Copy-Item $ExampleSourcePath\*.cs -Destination .\ -Recurse -Force
+        Copy-Item $ExampleSourcePath\Core\*.cs -Destination .\Core -Recurse -Force
+        Copy-Item $ExampleSourcePath\Models\*.cs -Destination .\Models -Recurse -Force
+    }
+    else {
+        Copy-Item $currentDir\Templates\Backend\* -Destination .\ -Recurse -Force
+    }
 
     $allFiles = Get-ChildItem -Path .\*.cs -Recurse -Force
+    
+    $refProjectName = $apiProjectName.Replace("-", ".")
 
     $allFiles | ForEach-Object {        
         $path = $_.Directory.FullName + "\" + $_.Name
-        $refProjectName = $apiProjectName.Replace("-", ".")
+
         $content = Get-Content -Path $path
-        $content = $content.Replace("namespace Example", "namespace $refProjectName")
-        $content = $content.Replace("using Example.", "using $refProjectName.")
+
+        if ($ExampleType) {
+            $content = $content.Replace("namespace Example.$ExampleType", "namespace $refProjectName")
+            $content = $content.Replace("using Example.$ExampleType.", "using $refProjectName.")
+        }
+        else {
+            $content = $content.Replace("namespace Example", "namespace $refProjectName")
+            $content = $content.Replace("using Example.", "using $refProjectName.")
+        }
+
         $content
         Set-Content $content -Path $path
     }
@@ -106,15 +129,43 @@ if ((Test-Path -Path $projectPath) -eq $false) {
     $projContent = $projContent.Replace("<TargetFramework>netcoreapp2.1</TargetFramework>", "<TargetFramework>netstandard2.0</TargetFramework>")
     $projContent = $projContent.Replace("<AzureFunctionsVersion>V2</AzureFunctionsVersion>", "<AzureFunctionsVersion>v3</AzureFunctionsVersion>")
     Set-Content $projContent -Path .\$projectFullName
+    
+    $sb = [System.Text.StringBuilder]::new()
+    [void]$sb.AppendLine('"FUNCTIONS_WORKER_RUNTIME": "dotnet",')
+    [void]$sb.AppendLine('"Db:Name": "sampledb",')
+    [void]$sb.AppendLine('"Db:Url": "https://localhost:8081",')
+    [void]$sb.AppendLine('"Db:Key": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",')
+    [void]$sb.AppendLine('"Db:RequestUnits": "10000"')
+    
+    $localStettingsContent = Get-Content -Path .\local.settings.json
+    $localStettingsContent = $localStettingsContent.Replace('"FUNCTIONS_WORKER_RUNTIME": "dotnet"', $sb.ToString())
+    $localStettingsContent
+
+    Set-Content $localStettingsContent -Path .\local.settings.json
 
     Pop-Location
     dotnet sln "$apiProjectName.sln" add "$apiProjectName\$projectFullName"
 
+    dotnet build "$apiProjectName.sln"
+
     if (!$ExampleProject) {
         $appProjectName = $Name + "-App"
+        npm init --yes
         npm install @angular/cli
-        node_modules\.bin\ng new $appProjectName --defaults=true    
+        node_modules\.bin\ng new $appProjectName --defaults=true
+        Push-Location $appProjectName
+        npm install graphql
+        npm install @graphql-codegen/cli
+        npm install @graphql-codegen/typescript
+        npm install --save-dev azure-functions-core-tools@3
+        npm install --save-dev newman
+
+        Copy-Item $currentDir\Templates\Frontend\* -Destination .\ -Recurse -Force
+      
+        Pop-Location
     }
 
+    Write-Host "Your new project is located: $projectPath"
+    Write-Host "Run the following command to generate your typescript files based on GraphQL schema: npx graphql-codegen --config ./codegen.yml"
     Pop-Location
 }

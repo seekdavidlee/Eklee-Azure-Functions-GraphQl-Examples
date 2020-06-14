@@ -1,5 +1,4 @@
-﻿using System;
-using Eklee.Azure.Functions.GraphQl.Connections;
+﻿using Eklee.Azure.Functions.GraphQl.Connections;
 using System.ComponentModel;
 
 namespace Example.DocumentDb.Models
