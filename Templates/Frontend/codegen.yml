@@ -1,6 +1,7 @@
 overwrite: true
 schema: "http://localhost:7071/api/testdocumentdb"
 generates:
-  src/generated/graphql.ts:
+  src/generated/graphql-types.ts:
     plugins:
-      - "typescript"
+      - typescript
+      - typescript-operations

@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory = $True)][string]$Name,
     [Parameter(Mandatory = $False)][string]$ExampleType, 
     [Parameter(Mandatory = $False)][string]$OutputPath,    
-    [Parameter(Mandatory = $False)][string]$NugetSource
+    [Parameter(Mandatory = $False)][string]$NugetSource,
+    [Switch]$addBulma
 )
 
 $ErrorActionPreference = 'Stop'
@@ -139,6 +140,15 @@ if ((Test-Path -Path $projectPath) -eq $false) {
     
     $localStettingsContent = Get-Content -Path .\local.settings.json
     $localStettingsContent = $localStettingsContent.Replace('"FUNCTIONS_WORKER_RUNTIME": "dotnet"', $sb.ToString())
+
+    $sbHost = [System.Text.StringBuilder]::new()
+    [void]$sbHost.AppendLine('IsEncrypted": false,')
+    [void]$sbHost.AppendLine('"Host": {')
+    [void]$sbHost.AppendLine('"LocalHttpPort": 7071,')
+    [void]$sbHost.AppendLine('"CORS": "*" },')
+
+    $localStettingsContent = $localStettingsContent.Replace('IsEncrypted": false,', $sbHost.ToString())
+
     $localStettingsContent
 
     Set-Content $localStettingsContent -Path .\local.settings.json
@@ -157,10 +167,29 @@ if ((Test-Path -Path $projectPath) -eq $false) {
         npm install graphql
         npm install @graphql-codegen/cli
         npm install @graphql-codegen/typescript
+        npm install @graphql-codegen/typescript-operations
+        npm install microsoft-adal-angular6
+
+        if ($addBulma) {
+            npm install bulma
+        }
+        
         npm install --save-dev azure-functions-core-tools@3
         npm install --save-dev newman
 
         Copy-Item $currentDir\Templates\Frontend\* -Destination .\ -Recurse -Force
+
+        if ($addBulma) {
+            $angularContent = Get-Content -Path .\angular.json
+
+            $sbBulma = [System.Text.StringBuilder]::new()
+            [void]$sbBulma.AppendLine('"src/styles.css",')
+            [void]$sbBulma.AppendLine('"node_modules/bulma/css/bulma.min.css"')
+
+            $angularContent = $angularContent.Replace('"src/styles.css"', $sbBulma.ToString())
+
+            Set-Content $angularContent -Path .\angular.json
+        }
       
         Pop-Location
     }
