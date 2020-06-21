@@ -5,6 +5,8 @@ param(
 	[Parameter(Mandatory = $True)][string]$OutputReportDir
 )
 
+$ErrorActionPreference = "Stop"
+
 $currentDir = (Get-Location).Path
 
 $buildConfig = "debug"
