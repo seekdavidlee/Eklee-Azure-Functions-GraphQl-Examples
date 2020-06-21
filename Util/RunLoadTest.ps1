@@ -5,6 +5,8 @@ param(
 	[Parameter(Mandatory = $True)][string]$OutputReportDir
 )
 
+$ErrorActionPreference = "Stop"
+
 $currentDir = (Get-Location).Path
 
 $buildConfig = "debug"
@@ -16,9 +18,28 @@ Pop-Location
 $workingDir = "$Name\$Name\bin\$buildConfig\netstandard2.0"
 
 Push-Location $workingDir
-npm install --save-dev azure-functions-core-tools@3
 
-Start-Process -FilePath node_modules\.bin\func -ArgumentList "host start -p 7072"
+$localSettings = '{
+	"IsEncrypted": false,
+	"Host": {
+		"LocalHttpPort": 7072,
+		"CORS": "*"
+	},
+
+	"Values": {
+		"AzureWebJobsStorage": "UseDevelopmentStorage=true",
+		"FUNCTIONS_WORKER_RUNTIME": "dotnet",
+		"Db:Name": "sampledb",
+		"Db:Url": "https://localhost:8081",
+		"Db:Key": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
+		"Db:RequestUnits": "10000"
+	}
+}'
+
+Set-Content -Path .\local.settings.json -Value $localSettings
+npm init --yes
+npm install --save-dev azure-functions-core-tools@3
+Start-Process -FilePath node_modules\.bin\func.cmd -ArgumentList "host start -p 7072"
 
 Start-Sleep -s 10
 
@@ -33,4 +54,3 @@ dotnet run -- -r "$currentDir\$projectName\LoadTest\$TestFileName" -g "http://lo
 Pop-Location
 
 Stop-Process $func
-

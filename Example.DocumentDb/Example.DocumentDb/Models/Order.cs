@@ -1,5 +1,6 @@
 using Example.DocumentDb.Core;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,6 +22,6 @@ namespace Example.DocumentDb.Models
 		public string CustomerId { get; set; }
 
 		[Description("Id of the Product.")]
-		public string[] ProductIdList { get; set; }
+		public List<string> ProductIdList { get; set; }
 	}
 }
