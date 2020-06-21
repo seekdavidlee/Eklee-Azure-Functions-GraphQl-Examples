@@ -25,14 +25,14 @@ $localSettings = '{
 		"LocalHttpPort": 7072,
 		"CORS": "*"
 	},
-
 	"Values": {
 		"AzureWebJobsStorage": "UseDevelopmentStorage=true",
 		"FUNCTIONS_WORKER_RUNTIME": "dotnet",
 		"Db:Name": "sampledb",
 		"Db:Url": "https://localhost:8081",
 		"Db:Key": "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
-		"Db:RequestUnits": "10000"
+		"Db:RequestUnits": "10000",
+		"Storage:ConnectionString": "UseDevelopmentStorage=true"
 	}
 }'
 
