@@ -12,6 +12,10 @@ namespace Example.DocumentDb.Core
 			Name = "query";
 
 			//--Begin--
+			queryBuilderFactory.Create<Product>(this, "GetAllProducts", "Get all products.")
+				.WithParameterBuilder()
+				.BuildQuery()
+				.BuildWithListResult();
 
 			queryBuilderFactory.Create<Customer>(this, "GetCustomerById", "Get Customer By Id.")
 				.WithParameterBuilder()
