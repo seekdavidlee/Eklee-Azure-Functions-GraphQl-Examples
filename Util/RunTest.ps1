@@ -12,7 +12,7 @@ Push-Location .\$Name
 dotnet build --configuration=$buildConfig
 Pop-Location
 
-$workingDir = "$Name\$Name\bin\$buildConfig\netstandard2.0"
+$workingDir = "$Name\$Name\bin\$buildConfig\netstandard2.1"
 
 Push-Location $workingDir
 
