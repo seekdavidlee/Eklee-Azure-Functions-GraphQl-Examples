@@ -1,1 +1,1 @@
-Copy-Item .\Util\local.settings.json -Destination .\Example.DocumentDb\Example.DocumentDb\
+Copy-Item .\Util\localsettings.json -Destination .\Example.DocumentDb\Example.DocumentDb\local.settings.json
