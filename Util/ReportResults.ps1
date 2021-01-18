@@ -4,9 +4,10 @@ param(
 
 Get-ChildItem -Path $OutputReportDir -Name | ForEach-Object {
 	$name = $_
-	$file = "$OutputReportDir\$name"
 
-	$results = Get-Content $file | ConvertFrom-Json
+    Write-Host "Processing $name"
+
+	$results = Get-Content "$OutputReportDir\$name" | ConvertFrom-Json
 
 	$TotalPayloadSizeInMb = $results.Summary.TotalPayloadSizeInMb
 	$AverageTimeInSeconds = $results.Summary.AverageTimeInSeconds
