@@ -21,6 +21,22 @@ steps:
     arguments: -Name Example.DocumentDb -ApiName testdocumentdb -TestFileName ProductsOnly2.json -OutputReportDir $(System.DefaultWorkingDirectory)\loadtest-reports
 
 - task: PowerShell@2
+  name: run_load_test_storage
+  displayName: Run Storage DB Load Test
+  inputs:
+    targetType: filePath
+    filePath: 'Util/RunLoadTest.ps1'
+    arguments: -Name Example.Storage -ApiName teststorage -TestFileName ProductsOnly2.json -OutputReportDir $(System.DefaultWorkingDirectory)\loadtest-reports
+
+- task: PowerShell@2
+  name: run_load_test_inmemory
+  displayName: Run In-Memory Test
+  inputs:
+    targetType: filePath
+    filePath: 'Util/RunLoadTest.ps1'
+    arguments: -Name Example.InMemory
+
+- task: PowerShell@2
   name: report_load_tests
   displayName: Report load tests
   inputs:
