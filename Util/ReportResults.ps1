@@ -2,7 +2,7 @@ param(
 	[Parameter(Mandatory = $True)][string]$OutputReportDir
 )
 
-Get-ChildItem -Path $OutputReportDir -Name | ForEach-Object {
+Get-ChildItem -Path $OutputReportDir -File -Name | ForEach-Object {
 	$name = $_
 
     Write-Host "Processing $name"
