@@ -19,3 +19,11 @@ steps:
     targetType: filePath
     filePath: 'Util/RunLoadTest.ps1'
     arguments: -Name Example.DocumentDb -ApiName testdocumentdb -TestFileName ProductsOnly2.json -OutputReportDir $(System.DefaultWorkingDirectory)
+
+- task: PowerShell@2
+  name: report_load_tests
+  displayName: Report load tests
+  inputs:
+    targetType: filePath
+    filePath: 'Util/ReportResults.ps1'
+    arguments: -OutputReportDir $(System.DefaultWorkingDirectory)
