@@ -20,6 +20,11 @@ steps:
     filePath: 'Util/RunLoadTest.ps1'
     arguments: -Name Example.DocumentDb -ApiName testdocumentdb -TestFileName ProductsOnly2.json -OutputReportDir $(System.DefaultWorkingDirectory)\loadtest-reports
 
+- script: | 
+    "%ProgramFiles(x86)%\Microsoft SDKs\Azure\Storage Emulator\AzureStorageEmulator.exe" init /server "(localdb)\MsSqlLocalDb"
+    "%ProgramFiles(x86)%\Microsoft SDKs\Azure\Storage Emulator\AzureStorageEmulator" start
+  displayName: Start Storage Emulator
+   
 - task: PowerShell@2
   name: run_load_test_storage
   displayName: Run Storage DB Load Test
