@@ -38,7 +38,7 @@ steps:
   displayName: Run In-Memory Test
   inputs:
     targetType: filePath
-    filePath: 'Util/RunLoadTest.ps1'
+    filePath: 'Util/RunTest.ps1'
     arguments: -Name Example.InMemory
 
 - task: PowerShell@2
