@@ -5,9 +5,24 @@ variables:
 - group: Global
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: 'Build Example.DocumentDb'
+- task: PowerShell@2
+  name: start_cosmos_db_emulator
+  displayName: Start Cosmos DB Emulator
   inputs:
-    command: 'build'
-    configuration: '$(BuildConfiguration)'
-    projects: 'Example.DocumentDb\Example.DocumentDb\Example.DocumentDb.csproj'
+    targetType: filePath
+    filePath: 'Util/StartCosmosDBEmulator.ps1'
+
+- task: PowerShell@2
+  name: copy_local_settings
+  displayName: Copy Local Settings file
+  inputs:
+    targetType: filePath
+    filePath: 'Util/CopyLocalSettings.ps1'
+
+- task: PowerShell@2
+  name: run_load_test
+  displayName: Run Load Test
+  inputs:
+    targetType: filePath
+    filePath: 'Util/RunLoadTest.ps1'
+    arguments: -Name Example.DocumentDb -ApiName testdocumentdb -TestFileName ProductsOnly2.json -OutputReportDir $(System.DefaultWorkingDirectory)
