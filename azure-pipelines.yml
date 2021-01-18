@@ -13,15 +13,8 @@ steps:
     filePath: 'Util/StartCosmosDBEmulator.ps1'
 
 - task: PowerShell@2
-  name: copy_local_settings
-  displayName: Copy Local Settings file
-  inputs:
-    targetType: filePath
-    filePath: 'Util/CopyLocalSettings.ps1'
-
-- task: PowerShell@2
-  name: run_load_test
-  displayName: Run Load Test
+  name: run_load_test_document
+  displayName: Run Document DB Load Test
   inputs:
     targetType: filePath
     filePath: 'Util/RunLoadTest.ps1'

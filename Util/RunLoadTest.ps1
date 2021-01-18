@@ -54,3 +54,13 @@ dotnet run -- -r "$currentDir\$projectName\LoadTest\$TestFileName" -g "http://lo
 Pop-Location
 
 Stop-Process $func
+
+$results = Get-Content $TestFileName | ConvertFrom-Json
+
+$TotalPayloadSizeInMb = $results.Summary.TotalPayloadSizeInMb
+$AverageTimeInSeconds = $results.Summary.AverageTimeInSeconds
+$TotalTimeMinutes = $results.Summary.TotalTimeMinutes
+
+Write-Host "TotalPayloadSizeInMb: $TotalPayloadSizeInMb"
+Write-Host "AverageTimeInSeconds: $AverageTimeInSeconds"
+Write-Host "TotalTimeMinutes: $TotalTimeMinutes"
