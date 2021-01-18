@@ -7,6 +7,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+if (!(Test-Path $OutputReportDir)) {
+	New-Item -ItemType Directory -Force -Path $OutputReportDir
+}
+
 $currentDir = (Get-Location).Path
 
 $buildConfig = "debug"

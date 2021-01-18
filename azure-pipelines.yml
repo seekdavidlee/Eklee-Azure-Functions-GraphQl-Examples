@@ -1,0 +1,50 @@
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+- group: Global
+
+steps:
+- task: PowerShell@2
+  name: start_cosmos_db_emulator
+  displayName: Start Cosmos DB Emulator
+  inputs:
+    targetType: filePath
+    filePath: 'Util/StartCosmosDBEmulator.ps1'
+
+- task: PowerShell@2
+  name: run_load_test_document
+  displayName: Run Document DB Load Test
+  inputs:
+    targetType: filePath
+    filePath: 'Util/RunLoadTest.ps1'
+    arguments: -Name Example.DocumentDb -ApiName testdocumentdb -TestFileName ProductsOnly2.json -OutputReportDir $(System.DefaultWorkingDirectory)\loadtest-reports
+
+- script: | 
+    "%ProgramFiles(x86)%\Microsoft SDKs\Azure\Storage Emulator\AzureStorageEmulator.exe" init /server "(localdb)\MsSqlLocalDb"
+    "%ProgramFiles(x86)%\Microsoft SDKs\Azure\Storage Emulator\AzureStorageEmulator" start
+  displayName: Start Storage Emulator
+   
+- task: PowerShell@2
+  name: run_load_test_storage
+  displayName: Run Storage DB Load Test
+  inputs:
+    targetType: filePath
+    filePath: 'Util/RunLoadTest.ps1'
+    arguments: -Name Example.Storage -ApiName teststorage -TestFileName ProductsOnly2.json -OutputReportDir $(System.DefaultWorkingDirectory)\loadtest-reports
+
+- task: PowerShell@2
+  name: run_load_test_inmemory
+  displayName: Run In-Memory Test
+  inputs:
+    targetType: filePath
+    filePath: 'Util/RunTest.ps1'
+    arguments: -Name Example.InMemory
+
+- task: PowerShell@2
+  name: report_load_tests
+  displayName: Report load tests
+  inputs:
+    targetType: filePath
+    filePath: 'Util/ReportResults.ps1'
+    arguments: -OutputReportDir $(System.DefaultWorkingDirectory)\loadtest-reports

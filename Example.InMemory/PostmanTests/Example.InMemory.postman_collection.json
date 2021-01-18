@@ -11,7 +11,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -38,7 +37,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation {\r\n   batchCreateProduct(product:[\r\n    { id:\"p1\", name:\"banana\" price: 1.99 },\r\n    { id:\"p2\", name:\"apple\" price: 0.99 },\r\n    { id:\"p3\", name:\"pinapple\" price: 0.92 },\r\n    { id:\"p4\", name:\"durain\" price: 1.09 },\r\n    { id:\"p5\", name:\"kiwi\" price: 1.19 },\r\n    { id:\"p6\", name:\"pie\" price: 4.45 },\r\n    { id:\"p7\", name:\"marble cake\" price: 3.99 },\r\n    { id:\"p8\", name:\"salt\" price: 9.31 },\r\n    { id:\"p9\", name:\"pepper\" price: 2.09 },\r\n    { id:\"p10\", name:\"sugar\" price: 4.88 },\r\n    { id:\"p11\", name:\"coffee\" price: 31.90 },\r\n    { id:\"p12\", name:\"nuts\" price: 0.93 },\r\n    { id:\"p13\", name:\"carrot\" price: 3.41 },\r\n    { id:\"p14\", name:\"brocolli\" price: 6.78 },\r\n    { id:\"p15\", name:\"ginger\" price: 12.99 },\r\n    { id:\"p16\", name:\"watermelon\" price: 12.99 },\r\n    { id:\"p17\", name:\"jack fruit\" price: 13.00 },\r\n    { id:\"p18\", name:\"potato\" price: 11.29 },\r\n    { id:\"p19\", name:\"beef\" price: 12.09 },\r\n    { id:\"p20\", name:\"chicken\" price: 4.31 }\r\n    \r\n  ]){\r\n    id\r\n    name\r\n    price\r\n  }\r\n}",
+						"query": "mutation {\r\n   batchCreateProduct(product:[\r\n    { id:\"p1\", name:\"banana\" price: 1.99 },\r\n    { id:\"p2\", name:\"apple\" price: 0.99 },\r\n    { id:\"p3\", name:\"pinapple\" price: 0.92 },\r\n    { id:\"p4\", name:\"durain\" price: 1.09 },\r\n    { id:\"p5\", name:\"kiwi\" price: 1.19 },\r\n    { id:\"p6\", name:\"pie\" price: 4.45 },\r\n    { id:\"p7\", name:\"marble cake\" price: 3.99 },\r\n    { id:\"p8\", name:\"salt\" price: 9.31 },\r\n    { id:\"p9\", name:\"pepper\" price: 2.09 },\r\n    { id:\"p10\", name:\"sugar\" price: 4.88 },\r\n    { id:\"p11\", name:\"coffee\" price: 31.9 },\r\n    { id:\"p12\", name:\"nuts\" price: 0.93 },\r\n    { id:\"p13\", name:\"carrot\" price: 3.41 },\r\n    { id:\"p14\", name:\"brocolli\" price: 6.78 },\r\n    { id:\"p15\", name:\"ginger\" price: 12.99 },\r\n    { id:\"p16\", name:\"watermelon\" price: 12.99 },\r\n    { id:\"p17\", name:\"jack fruit\" price: 13 },\r\n    { id:\"p18\", name:\"potato\" price: 11.29 },\r\n    { id:\"p19\", name:\"beef\" price: 12.09 },\r\n    { id:\"p20\", name:\"chicken\" price: 4.31 }\r\n    \r\n  ]){\r\n    id\r\n    name\r\n    price\r\n  }\r\n}",
 						"variables": ""
 					}
 				},
@@ -63,7 +62,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -115,7 +113,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -167,7 +164,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -223,7 +219,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -279,7 +274,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -291,7 +285,7 @@
 							"    var item = jsonData.data.getOrderById;",
 							"    pm.expect(item.id).to.eql(\"o2\");",
 							"    pm.expect(item.isActive).to.eql(true);",
-							"    pm.expect(item.ordered).to.eql(\"2019-01-11\");",
+							"    pm.expect(item.ordered).to.eql(\"2019-01-11T00:00:00Z\");",
 							"    ",
 							"    pm.expect(item.products.length).to.eql(1);",
 							"    pm.expect(item.customer.id).to.eql(\"c4\");",
@@ -345,7 +339,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "eada8a9d-b46f-4f28-a7f4-7aebed7fcd8a",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -357,7 +350,7 @@
 							"    var item = jsonData.data.getOrderById;",
 							"    pm.expect(item.id).to.eql(\"o3\");",
 							"    pm.expect(item.isActive).to.eql(true);",
-							"    pm.expect(item.ordered).to.eql(\"2019-06-21\");",
+							"    pm.expect(item.ordered).to.eql(\"2019-06-21T00:00:00Z\");",
 							"    ",
 							"    pm.expect(item.products.length).to.eql(5);",
 							"    pm.expect(item.customer.id).to.eql(\"c5\");",
